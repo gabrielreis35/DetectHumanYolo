@@ -36,7 +36,7 @@ frame_hyt = 480
 #     print("Cannot open camera")
 #     exit()
 
-def ProcessaFrame(frame):
+def ProcessaFrame(frame, fps):
     # Predict on image
     detect_params = model.predict(source=[frame], conf=0.80, save=False)
 
@@ -44,6 +44,7 @@ def ProcessaFrame(frame):
     DP = detect_params[0].numpy()
     print(DP)
 
+    cv2.putText(frame, str(fps), (10, 30), cv2.FONT_HERSHEY_COMPLEX, 1, (0,255,0),2)
     if len(DP) != 0:
         for i in range(len(detect_params[0])):
             print(i)
